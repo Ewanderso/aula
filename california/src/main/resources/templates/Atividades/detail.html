@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Sócio</title>
+</head>
+<body>
+    <h1>Detalhes do Sócio</h1>
+    <p>ID: <span th:text="${atividade.id}"></span></p>
+    <p>Nome: <span th:text="${atividade.nome}"></span></p>
+    <p>Atividade: <span th:text="${atividade.atividade}"></span></p>
+    <a th:href="@{/web/atividade}">Voltar</a>
+</body>
+</html>

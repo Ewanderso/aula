@@ -3,8 +3,6 @@ package br.com.clube.california.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +17,7 @@ import br.com.clube.california.model.Socio;
 
 @RequestMapping("/socio")
 @RestController
-public class SocioController {
+public class SocioController<Lond> {
     @Autowired
     private SocioRepository repositorio;
 
@@ -35,20 +33,19 @@ public class SocioController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public String excluir(@PathVariable lond id){
-        Socio SocioRepository=repositorio.findBy(id).orElse(null);
-        Object socioExistente;
+    public String excluir(@PathVariable Long id){
+        Socio socioExistente=repositorio.findById(id).orElse(null);
         if(socioExistente != null){
             repositorio.delete(socioExistente);
             return "sócio excluido com sucesso";
         }
+        return "Sócio não localizado";
     }
 
-    /*@PutMapping("/{id}")
-    public ResponseEntity<Socio> atualizarSocio(@PathVariable Long id, @RequestBody Socio socio) {
-        CrudRepository<Socio, Long> socioRepository;
-        Socio produtoExistente = socioRepository.findById(id).orElse(null);
-        Object socioExistente;
+    @PutMapping(value = "/{id}")
+    public Socio alterar(@PathVariable Long id, @RequestBody Socio socio) {
+        Socio socioExistente = repositorio.findById(id).orElse(null);
+
         if (socioExistente != null) {
             socioExistente.setNome(socio.getNome());
             socioExistente.setEndereco(socio.getEndereco());
@@ -56,10 +53,9 @@ public class SocioController {
             socioExistente.setEmail(socio.getEmail());
             socioExistente.setTelefone(socio.getTelefone());
 
-            socioRepository.save(socioExistente);
-            return ResponseEntity.ok(socioExistente);
-        } else {
-            return ResponseEntity.notFound().build();
+            return repositorio.save(socioExistente);
+            
         }
-    }*/
+        return socioExistente;
+    }
 }

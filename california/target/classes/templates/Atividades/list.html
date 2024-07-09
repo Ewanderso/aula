@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Sócios</title>
+</head>
+<body>
+    <h1>Lista de Atividade</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="atividades : ${atividade}">
+                <td th:text="${atividades.id}"></td>
+                <td th:text="${atividades.nome}"></td>
+                <td th:text="${atividades.descricao}"></td>
+                /*<td>
+                    <a th:href="@{/web/atividades/editar/{id}(id=${atividades.id})}">Editar</a> |
+                    <a th:href="@{/web/atividades/excluir/{id}(id=${atividades.id})}" onclick="return confirm('Tem certeza que deseja excluir esta atividade?');">Excluir</a>
+                </td>*/
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/web/atividades/novo}">Adicionar Nova Atividade</a>
+</body>
+</html>

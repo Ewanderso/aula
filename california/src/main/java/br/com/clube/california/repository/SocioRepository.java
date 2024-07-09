@@ -6,5 +6,6 @@ import br.com.clube.california.model.Socio;
 
 public interface SocioRepository extends JpaRepository<Socio, Long> {
 
+
  
 }
